@@ -31,5 +31,9 @@ namespace hada_p2
             this.fila = other.fila;
             this.columna = other.columna;
         }
+        public string ToString()
+        {
+            return $"({fila},{columna})";
+        }
     }
 }
