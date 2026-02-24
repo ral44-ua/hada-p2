@@ -24,7 +24,7 @@ namespace Hada
             for (int i = 0; i < longitud; i++)
             {
                 int filaActual = coordenadaInicio.Fila;
-                int columnaActual = 0;
+                int columnaActual = coordenadaInicio.Columna;
 
                 if (orientacion == 'h')
                 {
