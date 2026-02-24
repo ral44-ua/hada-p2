@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hada_p2
+namespace Hada
 {
-    internal class Coordenada
+    public class Coordenada
     {
-        int Fila = 0;
-        int Columna = 0;
+        public int Fila = 0;
+        public int  Columna = 0;
         public Coordenada()
         {
             Fila = 0;
@@ -31,13 +31,13 @@ namespace hada_p2
             this.Fila = other.Fila;
             this.Columna = other.Columna;
         }
-        public string ToString()
+        public override string ToString()
         {
             return $"({Fila},{Columna})";
         }
-        public int GetHasCode()
+        public override int GetHashCode()
         {
-            return this.Fila.GetHashCode() ^ this.Columna.GetHashCode(); ;
+            return this.Fila.GetHashCode() ^ this.Columna.GetHashCode();
         }
         public override bool Equals(object obj)
         {
