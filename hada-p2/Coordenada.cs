@@ -8,32 +8,56 @@ namespace hada_p2
 {
     internal class Coordenada
     {
-        int fila = 0;
-        int columna = 0;
+        int Fila = 0;
+        int Columna = 0;
         public Coordenada()
         {
-            fila = 0;
-            columna = 0;
+            Fila = 0;
+            Columna = 0;
         }
-        public Coordenada(int fila , int columnsa)
+        public Coordenada(int Fila , int Columna)
         {
-            this.fila = fila;
-            this.columna = columnsa;
+            this.Fila = Fila;
+            this.Columna = Columna;
         }
         public Coordenada (string fila , string columna)
         {
-            this.fila=int.Parse(fila);
-            this.columna=int.Parse(columna); ;
+            this.Fila=int.Parse(fila);
+            this.Columna=int.Parse(columna); ;
 
         }
         public Coordenada(Coordenada other)
         {
-            this.fila = other.fila;
-            this.columna = other.columna;
+            this.Fila = other.Fila;
+            this.Columna = other.Columna;
         }
         public string ToString()
         {
-            return $"({fila},{columna})";
+            return $"({Fila},{Columna})";
+        }
+        public int GetHasCode()
+        {
+            return this.Fila.GetHashCode() ^ this.Columna.GetHashCode(); ;
+        }
+        public override bool Equals(object obj)
+        {
+            
+            if (obj is Coordenada)
+            {
+                return this.Equals((Coordenada)obj);
+            }
+
+            return false;
+        }
+
+       
+        public bool Equals(Coordenada coordenada)
+        {
+            if (coordenada == null)
+            {
+                return false;
+            }
+            return (this.Fila == coordenada.Fila) && (this.Columna == coordenada.Columna);
         }
     }
 }
