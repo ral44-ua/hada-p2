@@ -1,0 +1,2 @@
+C:\Users\Ruben\source\repos\hada-p2\hada-p2\obj\Debug\hada-p2.csproj.AssemblyReference.cache
+C:\Users\Ruben\source\repos\hada-p2\hada-p2\obj\Debug\hada-p2.csproj.CoreCompileInputs.cache
