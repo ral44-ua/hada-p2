@@ -1,17 +1,13 @@
-﻿using System;
+﻿using Susing System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hada;
 
 namespace Hada
 {
     internal class Barco
     {
-        public Dictionary<Coordenada, String> CoordenadasBarco;
-        public string Nombre;
-        public int NumDanyos;
+        public Dictionary<Coordenada, string> CoordenadasBarco { get; private set; }
+        public string Nombre { get; private set; }
+        public int NumDanyos { get; private set; }
 
         public event EventHandler<TocadoArgs> eventoTocado;
         public event EventHandler<HundidoArgs> eventoHundido;
@@ -21,37 +17,30 @@ namespace Hada
             Nombre = nombre;
             NumDanyos = 0;
             this.CoordenadasBarco = new Dictionary<Coordenada, string>();
-            for (int i = 0; i < longitud; i++)
-            {
-                int filaActual = coordenadaInicio.Fila;
-                int columnaActual = coordenadaInicio.Columna;
 
+            Coordenada coordActual = new Coordenada(coordenadaInicio);
+            this.CoordenadasBarco.Add(coordActual, nombre);
+
+            for (int i = 1; i < longitud; i++)
+            {
                 if (orientacion == 'h')
                 {
-                    columnaActual += 1;
+                    coordActual = new Coordenada(coordActual.Fila, coordActual.Columna + 1);
                 }
                 else if (orientacion == 'v')
                 {
-                    filaActual += 1;
+                    coordActual = new Coordenada(coordActual.Fila + 1, coordActual.Columna);
                 }
-
-                    // Instanciamos la nueva coordenada para esta posición
-                    Coordenada nuevaCoordenada = new Coordenada(filaActual, columnaActual);
-
-                // Añadimos la clave (nuevaCoordenada) y el valor (el Nombre del barco) al diccionario
-                this.CoordenadasBarco.Add(nuevaCoordenada, this.Nombre);
+                this.CoordenadasBarco.Add(coordActual, nombre);
             }
         }
 
         public void Disparo(Coordenada c)
         {
-            
             if (this.CoordenadasBarco.ContainsKey(c))
             {
-                
                 if (!this.CoordenadasBarco[c].EndsWith("_T"))
                 {
-                    
                     this.CoordenadasBarco[c] = this.CoordenadasBarco[c] + "_T";
                     this.NumDanyos++;
 
@@ -59,24 +48,21 @@ namespace Hada
 
                     if (hundido())
                     {
-                        
                         eventoHundido?.Invoke(this, new HundidoArgs(this.Nombre));
                     }
                 }
             }
-        
         }
+
         public bool hundido()
         {
             foreach (string etiqueta in this.CoordenadasBarco.Values)
             {
-               
                 if (!etiqueta.EndsWith("_T"))
                 {
                     return false;
                 }
             }
-
             return true;
         }
 
@@ -86,10 +72,8 @@ namespace Hada
             List<string> listaCoordenadas = new List<string>();
             foreach (KeyValuePair<Coordenada, string> par in this.CoordenadasBarco)
             {
-                
                 listaCoordenadas.Add($"[{par.Key.ToString()} :{par.Value}]");
             }
-
             return infoBarco + string.Join(" ", listaCoordenadas);
         }
     }
